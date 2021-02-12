@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <p>
+        <a href="{% url 'index' %}" >Home</a>
+        <a href="">Add room</a>
+    </p>
+
+
+{% block content %}
+{% endblock %}
+
+    <footer>
+        <p>made by Bartek</p>
+    </footer>
+</body>
+</html>
