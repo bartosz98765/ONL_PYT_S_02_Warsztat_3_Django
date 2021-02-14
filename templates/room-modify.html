@@ -13,9 +13,8 @@
             Capacity: <input type="number" name="capacity" value="{{ room.capacity }}"><br>
         </label>
         <label>
-            Projector: <input type="checkbox" name="projector" value="{{ room.is_projector }}"><br>
+            Projector: <input type="checkbox" name="projector" {% if room.is_projector == True %} checked {% endif %}><br>
         </label>
-        <input type="hidden" name="room_id" value="{{ room.id }}">
         <input type="submit" value="Modify">
 
     </form>

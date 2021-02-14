@@ -40,7 +40,7 @@ class RoomNew(View):
 class RoomsList(View):
 
     def get(self, request):
-        rooms = Rooms.objects.all()
+        rooms = Rooms.objects.all().order_by('id')
         reservations = Reservations.objects.filter(date='2021-02-14')
 
         today_iso = datetime.date.today().isoformat()
@@ -87,31 +87,30 @@ class RoomModify(View):
         # tu chyba można pobrać wszystko jednym request.POST i przypisać w jednej linii do zmiennych, sprawdzić to!!!
         # trzeba dodać pole hidden albo session, albo ciasteczka by przekazać ID
         room_name = request.POST.get('room_name')
-        room_id = request.POST.get('room_id')
         capacity = int(request.POST['capacity'])
-        projector = True if request.POST.get('projector') == 'on' else False
+        projector = bool(request.POST.get('projector') == 'on')
 
         if room_name != '':
             if capacity > 0:
                 try:
-                    room = Rooms.objects.get(pk=room_id)
+                    room = Rooms.objects.get(pk=id)
                     room.name = room_name
                     room.capacity = capacity
                     room.is_projector = projector
                     room.save()
                 except Exception as e:
                     error = e
-                    room = Rooms.objects.get(pk=room_id)
+                    room = Rooms.objects.get(pk=id)
                     context = {'error': error, 'room': room, 'title': 'Modify room'}
                     return render(request, 'room-modify.html', context)
             else:
                 error = "Wrong capacity value!"
-                room = Rooms.objects.get(pk=room_id)
+                room = Rooms.objects.get(pk=id)
                 context = {'error': error, 'room': room, 'title':'Modify room'}
                 return render(request, 'room-modify.html', context)
         else:
             error = "Name cannot be empty!"
-            room = Rooms.objects.get(pk=room_id)
+            room = Rooms.objects.get(pk=id)
             context = {'error': error, 'room': room, 'title': 'Modify room'}
             return render(request, 'room-modify.html', context)
 
