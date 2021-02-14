@@ -11,7 +11,7 @@
         <th>Name</th><th>Capacity</th><th>Projector</th><th>Available</th><th>edit</th><th>delete</th><th>reserve</th>
         {% for room in rooms %}
             <tr>
-            <td> <a href="{% url 'room_details' room.id %}" > {{ room.name }} </td>
+                <td> <a href="{% url 'room_details' room.id %}"> {{ room.name }} </a></td>
             <td> {{ room.capacity }} </td>
             <td> {{ room.is_projector }} </td>
             <td>
@@ -21,10 +21,12 @@
                 {% endif %}
             {% endfor %}
             </td>
-            <td><input type="submit" name="submit" value="edit"></td>
-            <td><input type="submit" name="submit" value="delete"></td>
-            <td><input type="submit" name="submit" value="reserve"></td>
+            <td><input type="submit" name="edit" value="edit"></td>
+            <td><input type="submit" name="dalete" value="delete"></td>
+            <td><input type="submit" name="reserve" value="reserve"></td>
             </tr>
+        {% empty %}
+            <tr><td> colspan="6">Brak dostępnych sal</td></tr>
         {% endfor %}
     </table>
 
