@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>Delete room: {{ room.name }} ?</p>
+    <br>
+    <form method="post">
+    {% csrf_token %}
+        <input type="submit" name="delete" value="YES">
+        <input type="submit" name="delete" value="NO">
+    </form>
+    <br>
+    <a href="{% url 'room_modify' room.id %}">MODIFY</a>
+    <a href="{% url 'room_reserve' room.id %}"  >RESERVE</a>
+
+{% endblock %}

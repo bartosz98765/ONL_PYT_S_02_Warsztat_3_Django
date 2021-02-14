@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>
+        Add new room
+    </h2>
+    <form method="post">
+    {% csrf_token %}
+        <label>
+            Name: <br><input type="text" name="room_name"><br>
+        </label>
+        <label>
+            Capacity: <br><input type="number" name="capacity" value="0"><br>
+        </label>
+        <label>
+            Projector: <br><input type="checkbox" name="projector"><br>
+        </label>
+        <input type="submit" value="SAVE"><br>
+        <h3>
+            {{ error }}
+        </h3>
+    </form>
+
+    <a href="{% url 'rooms_list' %}">Back to Rooms list</a>
+
+
+{% endblock %}

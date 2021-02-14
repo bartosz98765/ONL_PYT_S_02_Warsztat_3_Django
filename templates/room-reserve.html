@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="post">
+    {% csrf_token %}
+        <h2> Rezerwacja sali: {{ room.name }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label>
+                Data rezerwacji: <input type="date" name="date"><br><br>
+            </label>
+            <label>
+                Komentarz: <br><textarea name="comment"></textarea><br>
+            </label>
+            <br><input type="submit" value="Reserve">
+        <h2>
+            {{ error }}
+        </h2>
+        </form>
+
+        <h3>RESERVED DAYS</h3>
+        <ul>
+            {% for reservation in reserved_days %}
+                <li>
+                    {{ reservation.date }}
+                    {{ reservation.comment }}
+                </li>
+            {% endfor %}
+
+    </form>
+
+    <p>-------------------------------------</p>
+    <a href="{% url 'room_modify' room.id %}">MODIFY</a>
+    <a href="{% url 'room_delete' room.id %}">DELETE</a>
+    <a href="{% url 'room_reserve' room.id %}"  >RESERVE</a>
+
+
+
+{% endblock %}

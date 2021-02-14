@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>
+        Room reservation
+    </h2>
+    <h3>
+        Status date: {{ today_iso}}
+    </h3>
+    <table>
+        <th>Name</th><th>Capacity</th><th>Projector</th><th>Available</th><th>edit</th><th>delete</th><th>reserve</th>
+        {% for room in rooms %}
+            <tr>
+            <td> <a href="{% url 'room_details' room.id %}" > {{ room.name }} </td>
+            <td> {{ room.capacity }} </td>
+            <td> {{ room.is_projector }} </td>
+            <td>
+            {% for item in reservations %}
+                {% if item.room_id == room.id %}
+                    <p> NO </p>
+                {% endif %}
+            {% endfor %}
+            </td>
+            <td><input type="submit" name="submit" value="edit"></td>
+            <td><input type="submit" name="submit" value="delete"></td>
+            <td><input type="submit" name="submit" value="reserve"></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+{% endblock %}

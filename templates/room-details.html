@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>
+    Room details
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>
+            Name: {{ room.name }}<br>
+            Capacity: {{ room.capacity }}<br>
+            Is projector: {{ room.is_projector }}<br>
+        </h3>
+
+        <h3>RESERVED DAYS</h3>
+        <ul>
+            {% for reservation in reserved_days %}
+                <li>
+                    {{ reservation.date }}
+                    {{ reservation.comment }}
+                </li>
+            {% endfor %}
+
+        </ul>
+
+
+    </form>
+
+   <p>-------------------------------------</p>
+    <a href="{% url 'room_modify' room.id %}">MODIFY</a>
+    <a href="{% url 'room_delete' room.id %}">DELETE</a>
+    <a href="{% url 'room_reserve' room.id %}"  >RESERVE</a>
+
+
+{% endblock %}

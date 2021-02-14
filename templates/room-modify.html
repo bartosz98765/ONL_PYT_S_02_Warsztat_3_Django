@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>
+    Modify room parameters
+    </h2>
+    <form method="post">
+    {% csrf_token %}
+        <label>
+            Name: <input type="text" name="room_name" value="{{ room.name }}"><br>
+        </label>
+        <label>
+            Capacity: <input type="number" name="capacity" value="{{ room.capacity }}"><br>
+        </label>
+        <label>
+            Projector: <input type="checkbox" name="projector" value="{{ room.is_projector }}"><br>
+        </label>
+        <input type="hidden" name="room_id" value="{{ room.id }}">
+        <input type="submit" value="Modify">
+
+    </form>
+
+    <h2>
+    {{ error }}
+    </h2>
+
+    <a href="{% url 'room_delete' room.id %}">DELETE</a>
+    <a href="{% url 'room_reserve' room.id %}"  >RESERVE</a>
+
+{% endblock %}

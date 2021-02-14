@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <p>
-        <a href="{% url 'index' %}" >Home</a>
-        <a href="">Add room</a>
+        <a href="{% url 'rooms_list' %}" >Home</a>
+        <a href="{% url 'new_room' %}">Add room</a>
     </p>
 
 
 {% block content %}
 {% endblock %}
 
-    <footer>
-        <p>made by Bartek</p>
-    </footer>
+<footer class="footer">
+    <p>made by bartek</p>
+</footer>
 </body>
 </html>
